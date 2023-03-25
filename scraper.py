@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import urllib.request
+import random
 
 webUrl = urllib.request.urlopen("https://wwwnc.cdc.gov/eid/article/29/4/22-1538_article")
 soup = BeautifulSoup(webUrl, 'html.parser')
@@ -35,39 +36,42 @@ def filter_key_word(links, filter_words):
     return new
 
 
-def get_content(html):
+def get_title(html):
     """
-    Returns the string content of an article given a link.
+    Returns the string title of an article given a link.
     Only works on scientific american journal
     """
-    scraper = BeautifulSoup(html)
+    html_cast = urllib.request.urlopen(html)
+    scraper = BeautifulSoup(html_cast, 'html.parser')
+    title = scraper.find_all('meta')
+    new_title = []
+    
+    for meta in title:
+        try:
+            if meta['name'] == 'twitter:title':
+                new_title.append(meta)
+        except:
+            continue
+            # print("An exception occured my guy")
+        
+
+    return new_title
+    
     
 
 
+    # text = scraper.body.get_text()
+    # print(text)
+
     
-    
-
-
-
-
 
 temp = urllib.request.urlopen('https://www.scientificamerican.com/')
-lst = get_links(temp)
-new = filter_key_word(lst, ['/article/'])
+scientific_american_articles = filter_key_word(get_links(temp), ['/article/'])
 
-for item in new:
-    print(item)
+random_article = scientific_american_articles[random.randint(0, len(scientific_american_articles) - 1)]
 
-# print(soup.get_text())
-# f = open("sample.txt", "w")
-# content = soup.body.get_text()
-
-
-
-# print(content)
-# f.write(content)
-# f.close()
-
-
+new_title = get_title(random_article)
+title = str(new_title[0]['content'])
+print(title)
 
 

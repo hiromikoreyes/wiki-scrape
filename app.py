@@ -1,7 +1,10 @@
 from flask import Flask
+import scraper
 
 app = Flask(__name__)
 
+
+
 @app.route('/')
 def home():
-    return "<h1> home placeholder </h1>"
+    return f'<h1>{scraper.title}</h1>'
