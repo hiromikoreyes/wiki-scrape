@@ -43,25 +43,25 @@ def get_title(html):
     """
     html_cast = urllib.request.urlopen(html)
     scraper = BeautifulSoup(html_cast, 'html.parser')
-    title = scraper.find_all('meta')
-    new_title = []
-    
-    for meta in title:
-        try:
-            if meta['name'] == 'twitter:title':
-                new_title.append(meta)
-        except:
-            continue
-            # print("An exception occured my guy")
-        
-
-    return new_title
-    
+    return scraper.find_all('meta', {'name': 'twitter:title'})
     
 
+def get_body_content(html):
+    """
+    Returns the string title of an article given a link.
+    Only works on scientific american journal.
+    """
+    html_cast = urllib.request.urlopen(html)
+    scraper = BeautifulSoup(html_cast, 'html.parser')
+    body = scraper.find_all("div", {"class": "article-block article-text"})
+    new_body = []
+    
+    for item in body:
+        new_body.append(item.get_text())
 
-    # text = scraper.body.get_text()
-    # print(text)
+
+    return new_body
+
 
     
 
@@ -72,6 +72,7 @@ random_article = scientific_american_articles[random.randint(0, len(scientific_a
 
 new_title = get_title(random_article)
 title = str(new_title[0]['content'])
-print(title)
+body = get_body_content(random_article)
+print(body)
 
 

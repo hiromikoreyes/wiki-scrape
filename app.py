@@ -7,4 +7,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return f'<h1>{scraper.title}</h1>'
+    return f'''<h1>{scraper.title}</h1>
+                {scraper.body}
+            '''
