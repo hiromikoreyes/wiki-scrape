@@ -8,7 +8,7 @@ function loadArticles(numArticles = 20) {
 
     const title = document.createElement('div')
     title.classList.add("article-title")
-    title_text = document.createTextNode("this is a title..")
+    title_text = document.createTextNode("{{title}}")
     title.appendChild(title_text)
     article.appendChild(title)
 
