@@ -1,0 +1,24 @@
+.container
+{
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.article
+{
+    display: flex; 
+    flex-direction: column;
+    width: 350px;
+    height: 350px;
+    background-color: red;
+    margin: 8px;
+}
+
+.article-title
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25%;
+
+}

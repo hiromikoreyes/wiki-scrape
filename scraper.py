@@ -75,9 +75,3 @@ title = str(new_title[0]['content'])
 body = get_body_content(random_article)
 body_string = ''
 
-f= open("help.txt", "w")
-for line in body:
-    body_string+=line
-    f.write(line)
-f.close()
-# print(body)
