@@ -1,12 +1,9 @@
-from flask import Flask
+from flask import Flask, render_template
+
 import scraper
 
-app = Flask(__name__)
-
-
+app = Flask(__name__, template_folder='templates')
 
 @app.route('/')
 def home():
-    return f'''<h1>{scraper.title}</h1>
-                {scraper.body}
-            '''
+    return render_template('home.html',content=scraper.body_string, title=scraper.title)    

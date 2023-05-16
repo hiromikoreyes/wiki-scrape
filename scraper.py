@@ -48,8 +48,8 @@ def get_title(html):
 
 def get_body_content(html):
     """
-    Returns the string title of an article given a link.
-    Only works on scientific american journal.
+    Returns the list of text of an article's body,
+    given a link. Only works on scientific american journal.
     """
     html_cast = urllib.request.urlopen(html)
     scraper = BeautifulSoup(html_cast, 'html.parser')
@@ -73,6 +73,11 @@ random_article = scientific_american_articles[random.randint(0, len(scientific_a
 new_title = get_title(random_article)
 title = str(new_title[0]['content'])
 body = get_body_content(random_article)
-print(body)
+body_string = ''
 
-
+f= open("help.txt", "w")
+for line in body:
+    body_string+=line
+    f.write(line)
+f.close()
+# print(body)
