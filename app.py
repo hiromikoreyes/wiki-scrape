@@ -6,4 +6,4 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return render_template('display.html',content=scraper.body_string, title=scraper.title)    
+    return render_template('display.html')    

@@ -1,7 +1,7 @@
 .container
 {
     display: grid;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-columns: 33% 33% 33%;
 }
 
 .article
@@ -10,10 +10,10 @@
     border-radius: 10%;
     border: 2px solid black;
     flex-direction: column;
-    width: 350px;
-    height: 350px;
+    width: 550px;
+    height: 550px;
     background-color: rgb(147, 236, 209);
-    margin: 8px;
+    margin: 36px;
 }
 
 .article-title

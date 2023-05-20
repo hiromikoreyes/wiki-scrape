@@ -1,6 +1,6 @@
 const container = document.querySelector('.container');
 
-function loadArticles(numArticles = 20) {
+function loadArticles(numArticles = 9) {
   for (let i = 0; i < numArticles; i++) {
     const article = document.createElement('div');
     article.classList.add("article")

@@ -1,11 +1,14 @@
 from bs4 import BeautifulSoup
+import json
 import urllib.request
 import random
 
-webUrl = urllib.request.urlopen("https://wwwnc.cdc.gov/eid/article/29/4/22-1538_article")
-soup = BeautifulSoup(webUrl, 'html.parser')
+name = input("insert search thingy: ")
+link = f"https://en.wikipedia.org/wiki/{name}"
+webUrl = urllib.request.urlopen(link)
+main_html = BeautifulSoup(webUrl, 'html.parser')
+print(link)
 
-# print(type(webUrl))
 
 def get_links(html) -> list:
     """
@@ -13,65 +16,45 @@ def get_links(html) -> list:
     of the given html
     """
     lst = []
-
-    scraper = BeautifulSoup(html, 'html.parser')
-    for link in scraper.find_all('a'):
-        lst.append(link.get('href'))
+    for link in html.find_all('a'):
+        lst.append(str(link.get('href')))
 
     return lst
 
 
-def filter_key_word(links, filter_words):
+def whitelist_filter(links, filter_key):
     """
     Returns a new list of links from links, composed of strings
-    including the given filter words.
+    including the given filter_key.
     """
 
     new = []
-
-    for item in links:
-        for word in filter_words:
-            if word in item and item not in new:
-                new.append(item)
+    for link in links:
+        if link.find(filter_key) == 0 and link not in new:
+            new.append(link)
     return new
 
 
-def get_title(html):
-    """
-    Returns the string title of an article given a link.
-    Only works on scientific american journal
-    """
-    html_cast = urllib.request.urlopen(html)
-    scraper = BeautifulSoup(html_cast, 'html.parser')
-    return scraper.find_all('meta', {'name': 'twitter:title'})
-    
+def blacklist_filter(links, filter_list):
+    new = []
+    addFlag = True
+    for link in links:
+        addFlag = True
+        for word in filter_list:
+            if link.find(word) != -1 and link not in new:
+                addFlag = False
+        if(addFlag == True): new.append(link)
+    return new
 
-def get_body_content(html):
-    """
-    Returns the list of text of an article's body,
-    given a link. Only works on scientific american journal.
-    """
-    html_cast = urllib.request.urlopen(html)
-    scraper = BeautifulSoup(html_cast, 'html.parser')
-    body = scraper.find_all("div", {"class": "article-block article-text"})
-    new_body = []
-    
-    for item in body:
-        new_body.append(item.get_text())
+# def get_body_content(html):
+#     """Only works for wikipedia"""
+#     html.p
 
+mess_list = get_links(main_html)
+link_list = whitelist_filter(mess_list, '/wiki/')
+link_list = blacklist_filter(link_list, ['File:', 'Special:', 'Talk:', 'Category:', 'Help:', '(identifier)', 'Wikipedia:', '(disambiguation)'])
 
-    return new_body
-
-
-    
-
-temp = urllib.request.urlopen('https://www.scientificamerican.com/')
-scientific_american_articles = filter_key_word(get_links(temp), ['/article/'])
-
-random_article = scientific_american_articles[random.randint(0, len(scientific_american_articles) - 1)]
-
-new_title = get_title(random_article)
-title = str(new_title[0]['content'])
-body = get_body_content(random_article)
-body_string = ''
+# for x in link_list:
+#     print(x)
+# print(mess_list)
 
