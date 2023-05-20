@@ -70,15 +70,11 @@ def update_json(filepath, html):
     data = []
     with open(filepath, 'r') as outfile:
         try: data = json.load(outfile)
-        except: data = []
+        except: data = [] 
         data.append({"title": get_title(html), "content": get_body_content(html, 1000).strip()})
     with open(filepath, 'w') as outfile:
         outfile.write(json.dumps(data, indent=4))
 
-            
-
-
-    
 
 mess_list = get_links(main_html)
 link_list = whitelist_filter(mess_list, '/wiki/')
