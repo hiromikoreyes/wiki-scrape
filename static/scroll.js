@@ -1,17 +1,30 @@
 const container = document.querySelector('.container');
 
-function requestArticles(numArticles)
+function requestArticles(content)
 {
-  fetch('127.0.0.1:5000/api/endpoint', {
+  fetch('/api-endpoint', {
     method:  'POST',
-    headers: {
-      'Content-Type' : 'application/json'
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({text: content})
+  })  .then(response => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Request failed with status ' + response.status);
     }
   })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error(error);
+  });
 }
 
+
 function loadArticles(numArticles = 9) {
-  requestArticles()
+  var list_articles = requestArticles("Money")
+  console.log(list_articles)
   for (let i = 0; i < numArticles; i++) {
     const article = document.createElement('div');
     article.classList.add("article")

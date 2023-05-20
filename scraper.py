@@ -3,12 +3,6 @@ import json
 import urllib.request
 import random
 
-name = input("insert search thingy: ")
-link = f"https://en.wikipedia.org/wiki/{name}"
-webUrl = urllib.request.urlopen(link)
-main_html = BeautifulSoup(webUrl, 'html.parser')
-print(link)
-
 
 def get_links(html) -> list:
     """
@@ -60,13 +54,8 @@ def get_body_content(html, maxlen):
         if len(body) >= maxlen: return body
     return body
 
-def make_json(html):
-    data = {"title": get_title(html), "content": get_body_content(html, 1000).strip()}
-    json_object = json.dumps(data, indent=4)
-    with open("sample.json", 'w') as outfile:
-        outfile.write(json_object)
 
-def update_json(filepath, html):
+def make_json(filepath, html):
     data = []
     with open(filepath, 'r') as outfile:
         try: data = json.load(outfile)
@@ -75,19 +64,19 @@ def update_json(filepath, html):
     with open(filepath, 'w') as outfile:
         outfile.write(json.dumps(data, indent=4))
 
+def create_request(request):
+    """ sends a list of dictionaries of wikipedia titles and bodies, for the first 9 related links
+    """
+    link = f"https://en.wikipedia.org/wiki/{request}"
+    webUrl = urllib.request.urlopen(link)
+    main_html = BeautifulSoup(webUrl, 'html.parser')
+    link_list = whitelist_filter(get_links(main_html), '/wiki/')
+    link_list = blacklist_filter(link_list, ['File:', 'Special:', 'Talk:', 'Category:', 'Help:', '(identifier)', 'Wikipedia:', '(disambiguation)'])
 
-mess_list = get_links(main_html)
-link_list = whitelist_filter(mess_list, '/wiki/')
-link_list = blacklist_filter(link_list, ['File:', 'Special:', 'Talk:', 'Category:', 'Help:', '(identifier)', 'Wikipedia:', '(disambiguation)'])
-# make_json(main_html)
-update_json("sample.json", main_html)
-
-# f = open('sample.json',)
-# data = json.load(f)
-
-# print(data)
-
-# for x in link_list:
-#     print(x)
-# print(mess_list)
+    send_list = []
+    for i in range(9):
+        url = urllib.request.urlopen(f"https://en.wikipedia.org{link_list[i]}")
+        html = BeautifulSoup(url, 'html.parser')
+        send_list.append({"title": get_title(html), "content": get_body_content(html, 1000).strip()})
+    return send_list
 
