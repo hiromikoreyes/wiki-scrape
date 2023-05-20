@@ -1,4 +1,12 @@
 const container = document.querySelector('.container');
+var articlesRequested = false
+
+function overlayBuffering()
+{
+  buffer = document.createElement('div')
+  buffer.classList.add("buffer")
+}
+
 
 function requestArticles(content)
 {
@@ -14,6 +22,8 @@ function requestArticles(content)
     }
   })
   .then(data => {
+    loadArticles(9, data)
+    articlesRequested = false
     console.log(data);
   })
   .catch(error => {
@@ -22,9 +32,7 @@ function requestArticles(content)
 }
 
 
-function loadArticles(numArticles = 9) {
-  var list_articles = requestArticles("Money")
-  console.log(list_articles)
+function loadArticles(numArticles, data) {
   for (let i = 0; i < numArticles; i++) {
     const article = document.createElement('div');
     article.classList.add("article")
@@ -32,18 +40,19 @@ function loadArticles(numArticles = 9) {
 
     const title = document.createElement('div')
     title.classList.add("article-title")
-    title_text = document.createTextNode("{{title}}")
+    title_text = document.createTextNode(data[i]['title'])
     title.appendChild(title_text)
     article.appendChild(title)
 
   }
 }
 
-loadArticles()
+requestArticles("Money")
 
 window.addEventListener('scroll', () => {
-  console.log(window.innerHeight)
-  if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight){
-    loadArticles()
+  // console.log(window.innerHeight)
+  if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && !articlesRequested){
+    articlesRequested = true
+    requestArticles("Money")
   }
 })

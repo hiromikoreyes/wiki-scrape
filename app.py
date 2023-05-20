@@ -10,6 +10,6 @@ def home():
 
 @app.route('/api-endpoint', methods=['POST'])
 def getArticles():
-    print("getArticle() was called")
+    # print("getArticle() was called")
     data = json.loads(request.data)
     return jsonify(scraper.create_request(data['text']))

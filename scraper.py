@@ -74,9 +74,10 @@ def create_request(request):
     link_list = blacklist_filter(link_list, ['File:', 'Special:', 'Talk:', 'Category:', 'Help:', '(identifier)', 'Wikipedia:', '(disambiguation)'])
 
     send_list = []
-    for i in range(9):
-        url = urllib.request.urlopen(f"https://en.wikipedia.org{link_list[i]}")
+    while len(send_list) < 9:
+        url = urllib.request.urlopen(f"https://en.wikipedia.org{link_list[random.randint(0, len(link_list) - 1)]}")
         html = BeautifulSoup(url, 'html.parser')
-        send_list.append({"title": get_title(html), "content": get_body_content(html, 1000).strip()})
+        if {"title": get_title(html), "content": get_body_content(html, 1000).strip()} not in send_list:
+            send_list.append({"title": get_title(html), "content": get_body_content(html, 1000).strip()})
     return send_list
 
