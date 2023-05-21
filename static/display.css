@@ -8,11 +8,10 @@
 {
     display: flex; 
     border-radius: 10%;
-    border: 2px solid black;
     flex-direction: column;
     width: 550px;
     height: 550px;
-    background-color: rgb(147, 236, 209);
+    background-color: #74f59a;
     margin: 36px;
 }
 
@@ -26,4 +25,25 @@
     font-size: larger;
     font-weight: 500;
 
+}
+
+.buffer
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body
+{
+    background-color: #21242d;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.heading
+{
+    text-align: center;
+    color: #74f59a;
+    font-size: 96px;
+    padding: 50px
 }

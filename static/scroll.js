@@ -1,10 +1,19 @@
 const container = document.querySelector('.container');
-var articlesRequested = false
+const body = document.querySelector('body')
+body.src = "https://loading.io/asset/662561"
+var articlesRequested = false //Used to make sure the bottom scroll detection only sets off once per load
 
 function overlayBuffering()
 {
-  buffer = document.createElement('div')
+  buffer = document.createElement('img')
+  buffer.src = 'https://cssauthor.com/wp-content/uploads/2018/06/Bouncy-Preloader.gif'
   buffer.classList.add("buffer")
+  body.appendChild(buffer)
+}
+
+function removeBuffering()
+{
+  body.removeChild(buffer)
 }
 
 
@@ -23,6 +32,7 @@ function requestArticles(content)
   })
   .then(data => {
     loadArticles(9, data)
+    removeBuffering()
     articlesRequested = false
     console.log(data);
   })
@@ -47,12 +57,18 @@ function loadArticles(numArticles, data) {
   }
 }
 
-requestArticles("Money")
+
 
 window.addEventListener('scroll', () => {
   // console.log(window.innerHeight)
   if(window.scrollY + window.innerHeight >= document.documentElement.scrollHeight && !articlesRequested){
     articlesRequested = true
+    overlayBuffering()
     requestArticles("Money")
   }
 })
+
+//for once you land on the page
+overlayBuffering()
+requestArticles("Money")
+
