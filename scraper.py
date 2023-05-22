@@ -51,8 +51,8 @@ def get_body_content(html, maxlen):
 
     for item in tags:
         body += item.get_text()
-        if len(body) >= maxlen: return body
-    return body
+        if len(body) >= maxlen: return body[:825]
+    return body[:825]
 
 
 def make_json(filepath, html):
@@ -77,7 +77,11 @@ def create_request(request):
     while len(send_list) < 9:
         url = urllib.request.urlopen(f"https://en.wikipedia.org{link_list[random.randint(0, len(link_list) - 1)]}")
         html = BeautifulSoup(url, 'html.parser')
-        if {"title": get_title(html), "content": get_body_content(html, 1000).strip()} not in send_list:
-            send_list.append({"title": get_title(html), "content": get_body_content(html, 1000).strip()})
+        if {"title": get_title(html), "content": get_body_content(html, 875).strip()} not in send_list:
+            send_list.append({"title": get_title(html), "content": get_body_content(html, 875).strip()})
     return send_list
 
+
+def clean_body(body_string):
+    body_string = body_string.strip()
+    return body_string

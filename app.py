@@ -8,8 +8,8 @@ app = Flask(__name__)
 def home():
     return render_template('home.html')
 
-@app.route('/display')
-def display():
+@app.route('/display/<query>')
+def display(query):
     return render_template('display.html')
 
 @app.route('/api-endpoint', methods=['POST'])

@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
   <link rel="stylesheet" href="{{ url_for('static', filename='display.css')}}">
-  <script src="{{ url_for('static',filename='query.js')}}" defer></script>
-
 </head>
 
 <body>
@@ -17,11 +15,20 @@
 
     <div class="search-container">
       <input class="query grow-scroll" type="query">
-      <button type="send-query" class = "btn-query fade-in-slower"> query </button>
+      <button type="send-query" class = "btn-query fade-in-slower" onclick="query()"> query </button>
 
       </button>
     </div>
-
+    
+    <script>
+      const textBox = document.querySelector('input')
+      const btnQuery  = document.querySelector('button')
+  
+      function query()
+      {
+          window.location.replace("/display/" + textBox.value)
+      }
+    </script>
 
 </body>
 </html>

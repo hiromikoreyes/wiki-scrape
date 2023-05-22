@@ -23,6 +23,7 @@ body::-webkit-scrollbar {
 
 .article
 {
+    color: #21242d;
     display: flex; 
     border-radius: 10%;
     flex-direction: column;
@@ -33,13 +34,12 @@ body::-webkit-scrollbar {
 
 .article-title
 {
-    color: #21242d;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 25%;
-    margin: 24px;
+    height: 10%;
+    margin: 8px;
     font-size: x-large;
     font-weight: bold;
 
@@ -47,11 +47,8 @@ body::-webkit-scrollbar {
 
 .article-body
 {
-    color: #21242d;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: auto;
+    margin: 24px;
 
 }
 
