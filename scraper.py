@@ -75,10 +75,11 @@ def create_request(request):
 
     send_list = []
     while len(send_list) < 9:
-        url = urllib.request.urlopen(f"https://en.wikipedia.org{link_list[random.randint(0, len(link_list) - 1)]}")
+        link = f"https://en.wikipedia.org{link_list[random.randint(0, len(link_list) - 1)]}"
+        url = urllib.request.urlopen(link)
         html = BeautifulSoup(url, 'html.parser')
-        if {"title": get_title(html), "content": get_body_content(html, 875).strip()} not in send_list:
-            send_list.append({"title": get_title(html), "content": get_body_content(html, 875).strip()})
+        if {"title": get_title(html), "content": get_body_content(html, 875).strip(), "link": link} not in send_list:
+            send_list.append({"title": get_title(html), "content": get_body_content(html, 875).strip(), "link": link})
     return send_list
 
 

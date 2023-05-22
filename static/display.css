@@ -7,9 +7,9 @@ body
     flex-direction: column;
 }
 
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
     display: none;
-  }
+  } */
 
 
 .container
@@ -39,7 +39,8 @@ body::-webkit-scrollbar {
     justify-content: center;
     text-align: center;
     height: 10%;
-    margin: 8px;
+    width: 90%;
+    margin: 20px;
     font-size: x-large;
     font-weight: bold;
 
@@ -142,6 +143,5 @@ body::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
 
-    background-image: url('https://www.svgrepo.com/show/479646/magnifying-glass-9.svg');
 }
 

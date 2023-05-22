@@ -1,4 +1,4 @@
-const container = document.querySelector('.container');
+const container = document.querySelector('.container')
 const body = document.querySelector('body')
 var currentPath = window.location.href
 var articlesRequested = false //Used to make sure the bottom scroll detection only sets off once per load
@@ -17,6 +17,7 @@ function removeBuffering()
 }
 
 
+
 function requestArticles(content)
 {
   fetch('/api-endpoint', {
@@ -25,26 +26,33 @@ function requestArticles(content)
     body: JSON.stringify({text: content})
   })  .then(response => {
     if (response.ok) {
-      return response.json();
+      return response.json()
     } else {
-      throw new Error('Request failed with status ' + response.status);
+      throw new Error('Request failed with status ' + response.status)
     }
   })
   .then(data => {
-    loadArticles(9, data);
-    removeBuffering();
+    loadArticles(9, data)
+    removeBuffering()
     articlesRequested = false;
-    console.log(data);
   })
   .catch(error => {
-    body.innerHTML = '';
-    const errorMessage = document.createElement('div');
-    errorMessage.classList.add("heading");
-    errorText = document.createTextNode("there was an error, refresh the page if that doesn't work there's probably something wrong with my code.");
-    errorMessage.style = 'font-size: 48px;';
-    errorMessage.appendChild(errorText);
-    
+    body.innerHTML = ''
+    const errorMessage = document.createElement('div')
+    errorMessage.classList.add("heading")
+    errorText = document.createTextNode("there was an error..");
+    errorMessage.style = 'font-size: 48px;'
+    errorMessage.appendChild(errorText)
+
     body.appendChild(errorMessage)
+
+
+    const refreshLink = document.createElement('a')
+    refreshLink.appendChild(document.createTextNode('refresh!'))
+    refreshLink.href = window.location.href
+    
+    errorMessage.appendChild(refreshLink)
+    
     console.log("broken!!")
   });
 }
@@ -57,9 +65,11 @@ function loadArticles(numArticles, data) {
     article.classList.add("fade-in-fast")
     container.appendChild(article)
 
-    const title = document.createElement('div')
+    const title = document.createElement('a')
     title.classList.add("article-title")
     title_text = document.createTextNode(data[i]['title'])
+    title.href = data[i]['link']
+    title.target = "blank_"
     title.appendChild(title_text)
     article.appendChild(title)
 
