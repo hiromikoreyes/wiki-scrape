@@ -1,6 +1,5 @@
 const container = document.querySelector('.container');
 const body = document.querySelector('body')
-body.src = "https://loading.io/asset/662561"
 var articlesRequested = false //Used to make sure the bottom scroll detection only sets off once per load
 
 function overlayBuffering()
@@ -46,6 +45,7 @@ function loadArticles(numArticles, data) {
   for (let i = 0; i < numArticles; i++) {
     const article = document.createElement('div');
     article.classList.add("article")
+    article.classList.add("fade-in-fast")
     container.appendChild(article)
 
     const title = document.createElement('div')

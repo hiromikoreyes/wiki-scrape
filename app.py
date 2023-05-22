@@ -6,6 +6,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
+    return render_template('home.html')
+
+@app.route('/display')
+def display():
     return render_template('display.html')
 
 @app.route('/api-endpoint', methods=['POST'])
