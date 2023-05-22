@@ -5,15 +5,19 @@ var articlesRequested = false //Used to make sure the bottom scroll detection on
 
 function overlayBuffering()
 {
+  bufferContainer = document.createElement('div')
+  bufferContainer.classList.add("buffer")
+
   buffer = document.createElement('img')
   buffer.src = 'https://cssauthor.com/wp-content/uploads/2018/06/Bouncy-Preloader.gif'
-  buffer.classList.add("buffer")
-  body.appendChild(buffer)
+
+  body.appendChild(bufferContainer)
+  bufferContainer.appendChild(buffer)
 }
 
 function removeBuffering()
 {
-  body.removeChild(buffer)
+  body.removeChild(bufferContainer)
 }
 
 
@@ -32,7 +36,7 @@ function requestArticles(content)
     }
   })
   .then(data => {
-    loadArticles(9, data)
+    loadArticles(3, data)
     removeBuffering()
     articlesRequested = false;
   })

@@ -53,11 +53,26 @@ body
 
 }
 
+
 .buffer
 {
-    display: block;
+    display: flex;
+    justify-content: center;
+
+    height: 80px;
+    width: 200px;
+    object-fit: cover;
+
     margin-left: auto;
     margin-right: auto;
+
+}
+
+.buffer img{
+    width: 800px;
+    height: 225px;
+    object-fit: cover;
+    object-position: 20% 10%;
 }
 
 

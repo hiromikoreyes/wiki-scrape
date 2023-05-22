@@ -23,10 +23,19 @@
     <script>
       const textBox = document.querySelector('input')
       const btnQuery  = document.querySelector('button')
+
+      textBox.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter')
+          {
+            query()
+          }      
+      })
+
+
   
       function query()
       {
-          window.location.replace("/display/" + textBox.value)
+          window.location.replace("/display/" + textBox.value.replace(' ', '_'))
       }
     </script>
 

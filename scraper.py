@@ -74,7 +74,7 @@ def create_request(request):
     link_list = blacklist_filter(link_list, ['File:', 'Special:', 'Talk:', 'Category:', 'Help:', '(identifier)', 'Wikipedia:', '(disambiguation)'])
 
     send_list = []
-    while len(send_list) < 9:
+    while len(send_list) < 3:
         link = f"https://en.wikipedia.org{link_list[random.randint(0, len(link_list) - 1)]}"
         url = urllib.request.urlopen(link)
         html = BeautifulSoup(url, 'html.parser')
