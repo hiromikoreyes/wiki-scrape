@@ -6,15 +6,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="" />
   <link rel="stylesheet" href="{{ url_for('static', filename='display.css')}}">
+  <script src="{{ url_for('static',filename='query.js')}}" defer></script>
+
 </head>
 
 <body>
-  <div class="heading fade-in">
+  <div class="heading fade-in-slower">
     wiki-scrape
   </div>
 
     <div class="search-container">
-      <input type="query">
+      <input class="query grow-scroll" type="query">
+      <button type="send-query" class = "btn-query fade-in-slower"> query </button>
+
+      </button>
     </div>
 
 

@@ -7,6 +7,10 @@ body
     flex-direction: column;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+  }
+
 
 .container
 {
@@ -35,6 +39,7 @@ body
     justify-content: center;
     text-align: center;
     height: 25%;
+    margin: 24px;
     font-size: x-large;
     font-weight: bold;
 
@@ -66,10 +71,17 @@ body
     padding: 50px
 }
 
+.fade-in-slower
+{
+    opacity: 1;
+    animation: fadeIn 2s
+}
+
 .fade-in-slow
 { 
     opacity: 1;
     animation: fadeIn 1.5s; 
+    animation: name duration timing-function delay iteration-count direction fill-mode;
 }
 
 
@@ -79,9 +91,60 @@ body
     animation: fadeIn 0.75s; 
 }
 
+.grow-scroll
+{
+    animation: growScroll 1s;
+}
+
 @keyframes fadeIn
 {
     0% { opacity: 0; }
     100% { opacity: 1; }
 }
-  
+
+@keyframes growScroll
+{
+    0%{ width: 0px;}
+    100%{ width: 700px;}
+
+}
+
+.search-container
+{
+   display: flex;
+   margin: 200px;
+   justify-self: center;
+   align-self: center;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.query
+{
+    display: flex;
+    border-radius: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: xx-large;
+    height: 80px;
+    width: 700px;
+}
+
+.btn-query
+{
+    height: 80px;
+    width: 80px;
+    margin: 10px;
+    border-radius: 50%;
+    background-color: #74f59a;
+
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    color: #21242d;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-image: url('https://www.svgrepo.com/show/479646/magnifying-glass-9.svg');
+}
+
