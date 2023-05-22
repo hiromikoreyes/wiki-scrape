@@ -36,7 +36,7 @@ function requestArticles(content)
     }
   })
   .then(data => {
-    loadArticles(3, data)
+    loadArticles(6, data)
     removeBuffering()
     articlesRequested = false;
   })
@@ -101,4 +101,6 @@ window.addEventListener('scroll', () => {
 //for once you land on the page
 overlayBuffering()
 requestArticles(currentPath.slice(currentPath.indexOf('display') + 8,))
+
+
 

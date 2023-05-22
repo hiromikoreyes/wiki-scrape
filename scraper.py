@@ -41,7 +41,7 @@ def blacklist_filter(links, filter_list):
     return new
 
 def get_title(html):
-    return html.find(class_="mw-page-title-main").get_text()   
+    return html.find("h1").get_text()   
 
 def get_body_content(html, maxlen):
     """Only works for wikipedia"""
@@ -74,8 +74,9 @@ def create_request(request):
     link_list = blacklist_filter(link_list, ['File:', 'Special:', 'Talk:', 'Category:', 'Help:', '(identifier)', 'Wikipedia:', '(disambiguation)'])
 
     send_list = []
-    while len(send_list) < 3:
+    while len(send_list) < 6:
         link = f"https://en.wikipedia.org{link_list[random.randint(0, len(link_list) - 1)]}"
+        print(link)
         url = urllib.request.urlopen(link)
         html = BeautifulSoup(url, 'html.parser')
         if {"title": get_title(html), "content": get_body_content(html, 875).strip(), "link": link} not in send_list:
