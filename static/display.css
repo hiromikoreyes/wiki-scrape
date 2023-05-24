@@ -84,6 +84,13 @@ body
     padding: 50px
 }
 
+.subheading
+{
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+}
+
 .fade-in-slower
 {
     opacity: 1;

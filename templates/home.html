@@ -12,11 +12,14 @@
   <div class="heading fade-in-slower">
     wiki-scrape
   </div>
+  
+  <div class="subheading fade-in-slower">
+    enter something to search idk..
+  </div>
 
     <div class="search-container">
       <input class="query grow-scroll" type="query">
       <button type="send-query" class = "btn-query fade-in-slower" onclick="query()"> query </button>
-
       </button>
     </div>
     
@@ -31,8 +34,6 @@
           }      
       })
 
-
-  
       function query()
       {
           window.location.replace("/display/" + textBox.value.replace(' ', '_'))
